@@ -60,7 +60,7 @@ check_latest_version(){
 	fi
 }
 doupx(){
-	Archt="$(opkg info kernel | grep Architecture | awk -F "[ _]" '{print($2)}')"
+	Archt="$('uname' '-m')"
 	case $Archt in
 	"i386")
 	Arch="i386"
@@ -126,7 +126,7 @@ doupdate_core(){
 	rm -rf /tmp/AdGuardHomeupdate/* >/dev/null 2>&1
 	Arch=$(uci -q get AdGuardHome.AdGuardHome.arch)
 	if [ -z "$Arch" ]; then
-		Archt="$(opkg info kernel | grep Architecture | awk -F "[ _]" '{print($2)}')"
+		Archt="$('uname' '-m')"
 		case $Archt in
 		"i386"|"i486"|"i686"|"i786")
 		Arch="386"
